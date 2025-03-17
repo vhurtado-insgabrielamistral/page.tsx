@@ -1,0 +1,40 @@
+import { useState } from "react";
+
+const articles = [
+  { id: 1, title: "Benvingut al meu blog", content: "Primer article del blog del Raul, Fernando i Victor!" },
+  { id: 2, title: "Serveis web Part 2", content: "És la segona part de la pràctica de serveis en web" },
+  { id: 3, title: "Vercel", content: "La pràctica consta de una part teòrica i una part pràctica" },
+];
+
+export default function Home() {
+  const [selectedArticle, setSelectedArticle] = useState(null);
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      <header className="text-center text-3xl font-bold mb-6">Blog en Català</header>
+      <div className="max-w-3xl mx-auto bg-white p-6 shadow-md rounded-lg">
+        {selectedArticle ? (
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">{selectedArticle.title}</h2>
+            <p className="text-gray-700">{selectedArticle.content}</p>
+            <button className="mt-4 text-blue-500" onClick={() => setSelectedArticle(null)}>
+              ⬅ Torna enrere
+            </button>
+          </div>
+        ) : (
+          <ul>
+            {articles.map((article) => (
+              <li
+                key={article.id}
+                className="border-b p-4 cursor-pointer hover:bg-gray-200"
+                onClick={() => setSelectedArticle(article)}
+              >
+                {article.title}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
