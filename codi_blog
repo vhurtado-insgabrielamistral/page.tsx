@@ -1,40 +1,23 @@
 import { useState } from "react";
+import Link from "next/link";
 
-const articles = [
-  { id: 1, title: "Benvingut al meu blog", content: "Primer article del blog del Raul, Fernando i Victor!" },
-  { id: 2, title: "Serveis web Part 2", content: "És la segona part de la pràctica de serveis en web" },
-  { id: 3, title: "Vercel", content: "La pràctica consta de una part teòrica i una part pràctica" },
+const posts = [
+  { id: 1, title: "Benvinguts al Blog de l'Institut Gabriela Mistral", content: "Aquest és el nostre espai per compartir notícies i experiències." },
+  { id: 2, title: "Excursió a Montserrat", content: "Els alumnes de 3r d'ESO han fet una sortida espectacular a Montserrat." },
+  { id: 3, title: "Projecte de Robòtica", content: "L'equip de robòtica ha guanyat un premi en la competició local!" }
 ];
 
 export default function Home() {
-  const [selectedArticle, setSelectedArticle] = useState(null);
-
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <header className="text-center text-3xl font-bold mb-6">Blog en Català</header>
-      <div className="max-w-3xl mx-auto bg-white p-6 shadow-md rounded-lg">
-        {selectedArticle ? (
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">{selectedArticle.title}</h2>
-            <p className="text-gray-700">{selectedArticle.content}</p>
-            <button className="mt-4 text-blue-500" onClick={() => setSelectedArticle(null)}>
-              ⬅ Torna enrere
-            </button>
-          </div>
-        ) : (
-          <ul>
-            {articles.map((article) => (
-              <li
-                key={article.id}
-                className="border-b p-4 cursor-pointer hover:bg-gray-200"
-                onClick={() => setSelectedArticle(article)}
-              >
-                {article.title}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+    <div className="p-6 max-w-2xl mx-auto">
+      <h1 className="text-3xl font-bold mb-4">Blog de l'Institut Gabriela Mistral</h1>
+      {posts.map((post) => (
+        <div key={post.id} className="mb-4 p-4 border rounded-lg">
+          <Link href={`/post/${post.id}`}>
+            <h2 className="text-xl font-semibold text-blue-600 cursor-pointer">{post.title}</h2>
+          </Link>
+        </div>
+      ))}
     </div>
   );
 }
